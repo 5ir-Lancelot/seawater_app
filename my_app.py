@@ -20,7 +20,8 @@ from dash import html
 from dash.dependencies import Input, Output
 import plotly.graph_objects as go
 import dash_defer_js_import as dji
-import numpy as np
+
+from numpy import log10
 
 from plotly.subplots import make_subplots
 
@@ -121,8 +122,8 @@ T_slider=dcc.Slider(id='T_input', min=T_range[0], max=T_range[1], step=0.5, mark
 CO2_slider=dcc.Slider(id='CO2_input', min=CO2_range[0], max=CO2_range[1], step=10, marks={x: str(x)+'ppm' for x in range(CO2_range[0],CO2_range[1],100)},
         value=415, tooltip={"placement": "bottom", "always_visible": True}, updatemode='drag')
 
-alkalinity_slider=dcc.Slider(id='alkalinity_input', min=np.log10(alkalinity_range[0]) ,max=np.log10(alkalinity_range[1]), step=0.01,
-        marks={x: '{:.0e}'.format(10**x)+' ueq/L' for x in range(0,6,int(1))},value=np.log10(2500),
+alkalinity_slider=dcc.Slider(id='alkalinity_input', min=log10(alkalinity_range[0]) ,max=log10(alkalinity_range[1]), step=0.01,
+        marks={x: '{:.0e}'.format(10**x)+' ueq/L' for x in range(0,6,int(1))},value=log10(2500),
         tooltip={"placement": "bottom", "always_visible": True},
         updatemode='drag',drag_value=3)
 
